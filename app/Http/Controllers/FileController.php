@@ -105,8 +105,20 @@ class FileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        //Obtiene el archivo que se desea eliminar
+        $file = File::whereId($id)->firstOrFail();
+
+        //Borra del storage / Almacenamiento
+        unlink(public_path('storage' . '/' . Auth::id() . '/' . $file->name));
+
+        //Borra el registro de la basde de datos
+        $file->delete();
+
+        Alert::info('Atencion!', 'Se ha eliminado el archivo');
+        return back();
+
+
     }
 }

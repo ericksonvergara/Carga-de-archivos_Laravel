@@ -24,14 +24,19 @@
                                             <th scope="row">{{ $file->id }}</th>
                                             <td>{{ $file->name }}</td>
                                             <td>
-                                                <a href="storage/{{ Auth::id() }}/{{ $file->name }}" class="btn btn-sm btn-outline-secundary">
+                                                <a target="_blank" href="storage/{{ Auth::id() }}/{{ $file->name }}"
+                                                    class="btn btn-sm btn-outline-secundary">
                                                     Ver
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="" class="btn btn-sm btn-outline-danger">
-                                                    Eliminar
-                                                </a>
+                                                <form action="{{ route('user.files.destroy', $file->id) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                                        Eliminar
+                                                    </button>
+
                                             </td>
                                         </tr>
                                     @endforeach

@@ -22,3 +22,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/upload', 'FileController@store')->name('user.files.store');
 Route::get('/files', 'FileController@index')->name('user.files.index');
+Route::delete('/files/{files}', 'FileController@destroy')->name('user.files.destroy');
